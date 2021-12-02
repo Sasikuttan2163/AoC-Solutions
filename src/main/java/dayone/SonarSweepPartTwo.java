@@ -17,13 +17,12 @@ public class SonarSweepPartTwo {
             ArrayList<Integer> elements = new ArrayList<Integer>();
             while(sc.hasNextInt())
                 elements.add(sc.nextInt());
-            int sumprev = 0, sumcurr = 0, count = 0;
+            int count = 0;
             for(int i=0; i< elements.size()-3; i++){
                 if(elements.get(i)<elements.get(i+3)){
                     count++;
                 }
-                sumprev = sumcurr;
-                sumcurr=0;
+
             }
             System.out.println(count);
         }
