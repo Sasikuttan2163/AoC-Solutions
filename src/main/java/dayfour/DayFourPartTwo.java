@@ -3,9 +3,10 @@ package dayfour;
 import utilities.MyUtilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class DayFour {
+public class DayFourPartTwo {
     static ArrayList<String> data = new ArrayList<String>();
     static ArrayList<Integer> bingoList = new ArrayList<>();
     static ArrayList<String> trimmedData;
@@ -22,7 +23,7 @@ public class DayFour {
     public static void readValues(){
         StringTokenizer stringTokenizer = new StringTokenizer(data.get(0), ",");
         while(stringTokenizer.hasMoreTokens())
-        bingoList.add(Integer.parseInt(stringTokenizer.nextToken()));
+            bingoList.add(Integer.parseInt(stringTokenizer.nextToken()));
         data.remove(0);
     }
 
@@ -36,7 +37,7 @@ public class DayFour {
         for(String lines:data){
             stringTokenizer = new StringTokenizer(lines, " ");
             while(stringTokenizer.hasMoreTokens())
-            trimmedData.add(stringTokenizer.nextToken());
+                trimmedData.add(stringTokenizer.nextToken());
         }
     }
 
@@ -58,17 +59,21 @@ public class DayFour {
     public static void match(){
         int matchMatrix = 0;
         int[] matchElements = new int[0];
+        boolean[] wonBoard = new boolean[matrices.size()];
         label:
         for(int i=5; true; i++){
             int[] searchElements = new int[i];
             for(int j=0; j<i; j++)
                 searchElements[j] = bingoList.get(j);
             for(int[][] m:matrices) {
+                if(numberOfBoardLeft(wonBoard)==0) {
+                    break label;
+                }
                 for (int[] k : m) {
                     if (MyUtilities.containsAll(k, searchElements)) {
                         matchMatrix=matrices.indexOf(m);
                         matchElements = searchElements;
-                        break label;
+                        wonBoard[matrices.indexOf(m)] = true;
                     }
                 }
                 int[] col = new int[5];
@@ -78,7 +83,7 @@ public class DayFour {
                     if(MyUtilities.containsAll(col, searchElements)){
                         matchMatrix=matrices.indexOf(m);
                         matchElements = searchElements;
-                        break label;
+                        wonBoard[matrices.indexOf(m)] = true;
                     }
                 }
             }
@@ -99,5 +104,12 @@ public class DayFour {
         System.out.println(sum*matchElements[matchElements.length-1]);
     }
 
-
+    public static int numberOfBoardLeft(boolean[] values){
+        int count=0;
+        for(boolean b: values){
+            if(!b)
+                count++;
+        }
+        return count;
+    }
 }

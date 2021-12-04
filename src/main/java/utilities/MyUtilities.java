@@ -21,13 +21,12 @@ public class MyUtilities {
         return arr;
     }
     public static boolean containsAll(int[] arr, int[] search){
-        boolean contains = false;
         boolean[] containsEachElement = new boolean[arr.length];
-        for(int i=0; i<arr.length; i++){
-            int m=arr[i];
-            for(int n:search){
-                if(m==n){
-                    containsEachElement[i]=true;
+        for(int n:search){
+            for(int i=0; i<arr.length; i++) {
+                int m=arr[i];
+                if (m == n) {
+                    containsEachElement[i] = true;
                 }
             }
         }
