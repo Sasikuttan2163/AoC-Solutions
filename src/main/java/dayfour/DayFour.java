@@ -79,7 +79,6 @@ public class DayFour {
             }
 
         }
-        System.out.println(matchMatrix);
         int sum=0;
         for(int[] m:matrices.get(matchMatrix)){
             for(int n: m){
