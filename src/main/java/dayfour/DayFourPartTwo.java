@@ -25,6 +25,7 @@ public class DayFourPartTwo {
         while(stringTokenizer.hasMoreTokens())
             bingoList.add(Integer.parseInt(stringTokenizer.nextToken()));
         data.remove(0);
+
     }
 
     public static void removeEmptyLines(){
@@ -32,13 +33,14 @@ public class DayFourPartTwo {
     }
 
     public static void removeExcessSpaces(){
-        StringTokenizer stringTokenizer;
         trimmedData = new ArrayList<String>();
-        for(String lines:data){
-            stringTokenizer = new StringTokenizer(lines, " ");
-            while(stringTokenizer.hasMoreTokens())
-                trimmedData.add(stringTokenizer.nextToken());
-        }
+        data.forEach(line->{
+            trimmedData.addAll(Arrays.asList(line.split("[ \n]")));
+            trimmedData.removeIf(el->{
+                return el.equals("");
+            });
+        });
+        System.out.println(trimmedData);
     }
 
     public static void process(){

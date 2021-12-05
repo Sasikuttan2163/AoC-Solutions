@@ -3,6 +3,7 @@ package dayfour;
 import utilities.MyUtilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class DayFour {
@@ -20,9 +21,8 @@ public class DayFour {
     }
 
     public static void readValues(){
-        StringTokenizer stringTokenizer = new StringTokenizer(data.get(0), ",");
-        while(stringTokenizer.hasMoreTokens())
-        bingoList.add(Integer.parseInt(stringTokenizer.nextToken()));
+        trimmedData = new ArrayList<>();
+        trimmedData.addAll(Arrays.asList(data.get(0).split(",")));
         data.remove(0);
     }
 
@@ -31,13 +31,14 @@ public class DayFour {
     }
 
     public static void removeExcessSpaces(){
-        StringTokenizer stringTokenizer;
         trimmedData = new ArrayList<String>();
-        for(String lines:data){
-            stringTokenizer = new StringTokenizer(lines, " ");
-            while(stringTokenizer.hasMoreTokens())
-            trimmedData.add(stringTokenizer.nextToken());
-        }
+        data.forEach(line->{
+            trimmedData.addAll(Arrays.asList(line.split("[ \n]")));
+            trimmedData.removeIf(el->{
+                return el.equals("");
+            });
+        });
+        System.out.println(trimmedData);
     }
 
     public static void process(){
