@@ -59,7 +59,6 @@ public class DayFive {
             }
         }
         System.out.println(multipleLinesPointList.size());
-
     }
     public static int countOccurrences(Point2D point2D){
         int count=0;

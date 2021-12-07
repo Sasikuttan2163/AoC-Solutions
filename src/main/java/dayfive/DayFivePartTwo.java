@@ -12,6 +12,7 @@ public class DayFivePartTwo {
     static ArrayList<Point2D> pointList;
     static ArrayList<Point2D> multipleLinesPointList;
     public static void main(String[] args) {
+        long a = System.currentTimeMillis();
         data = MyUtilities.readFile("datadayfive.txt");
         lines = new ArrayList<>();
         pointList = new ArrayList<>();
@@ -69,13 +70,16 @@ public class DayFivePartTwo {
             else break;
         }
         System.out.println(multipleLinesPointList.size());
-
+        long b = System.currentTimeMillis();
+        System.out.println(b-a+"ms");
     }
     public static int countOccurrences(Point2D point2D){
         int count=0;
         for(Point2D p: pointList){
             if(p.equals(point2D))
                 count++;
+            if(count>1)
+                break;
         }
         return count;
     }
